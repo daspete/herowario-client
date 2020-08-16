@@ -1,0 +1,50 @@
+<template>
+    <div class="gameview">
+        <Materials :materials="me.materials" />
+        <BuildingMenu @build="BuildBuilding" />
+        <Buildings :buildings="me.buildings" />
+        
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        config: { type: Object, default: () => { return {} } }
+    },
+
+    data(){
+        return {
+            me: {},
+            others: {}
+        }
+    },
+
+    async mounted(){
+        this.socket = await this.$io.Connect()
+        this.socket.on('game.update', (data) => {
+            this.me = data.me
+            this.others = data.others
+        })
+    },
+
+    methods: {
+        BuildBuilding(type){
+            this.socket.emit('player.input', {
+                type: 'building.add',
+                data: { type }
+            })
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+.gameview {
+    
+}
+
+
+
+
+</style>
