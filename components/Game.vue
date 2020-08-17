@@ -62,7 +62,9 @@ export default {
 <style lang="scss">
 
 .game {
-    
+    @apply w-screen;
+    @apply h-screen;
+    @apply bg-green-900;
 }
 
 </style>

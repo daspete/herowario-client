@@ -1,9 +1,11 @@
 <template>
     <div class="gameview">
-        <Materials :materials="me.materials" />
-        <BuildingMenu @build="BuildBuilding" />
-        <Buildings :buildings="me.buildings" />
-        
+        <!-- <Materials :materials="me.materials" />
+        <BuildingMenu @build="BuildBuilding" :player="me" />
+        <Buildings :buildings="me.buildings" /> -->
+        <ContentContainer>
+            <Materials :materials="me.materials" />
+        </ContentContainer>
     </div>
 </template>
 
