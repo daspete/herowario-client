@@ -3,9 +3,10 @@
         <!-- <Materials :materials="me.materials" />
         <BuildingMenu @build="BuildBuilding" :player="me" />
         <Buildings :buildings="me.buildings" /> -->
-        <ContentContainer>
+        <!-- <ContentContainer>
             <Materials :materials="me.materials" />
-        </ContentContainer>
+        </ContentContainer> -->
+        <SpaceView v-if="me.id" :player="me" />
     </div>
 </template>
 
@@ -18,16 +19,19 @@ export default {
     data(){
         return {
             me: {},
-            others: {}
+            others: {},
+            planets: []
         }
     },
 
     async mounted(){
         this.socket = await this.$io.Connect()
+        
         this.socket.on('game.update', (data) => {
             this.me = data.me
             this.others = data.others
         })
+        
     },
 
     methods: {

@@ -21,6 +21,9 @@ export default {
 
     async mounted(){
         this.socket = await this.$io.Connect()
+        this.socket.on('disconnect', () => {
+            this.joined = false
+        })
         this.socket.emit('game.config', (gameConfig) => {
             this.config = gameConfig
             this.$store.commit('config/SetConfig', gameConfig)
