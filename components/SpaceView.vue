@@ -155,6 +155,7 @@ export default {
     background-color: rgba(white, 0.1);
     color: white;
     font-size: 10px;
+    pointer-events: none;
 }
 
 .crosshair {
