@@ -3,11 +3,26 @@
         <canvas ref="canvas"></canvas>
 
         <div class="hud">
-            <div>x: {{ Math.round(player.position.x) }}</div>
-            <div>y: {{ Math.round(player.position.y) }}</div>
-            <div>z: {{ Math.round(player.position.z) }}</div>
+            <div class="flex">
+                <div class="w-3/6">
+                    <div class="font-bold">Player position</div>
+                    <div>x: {{ Math.round(player.position.x) }}</div>
+                    <div>y: {{ Math.round(player.position.y) }}</div>
+                    <div>z: {{ Math.round(player.position.z) }}</div>
+                </div>
+                <div class="w-3/6">
+                    <div class="font-bold">Homeplanet position</div>
+                    <div v-if="GetPlayerEntity() && GetPlayerEntity().navigationTarget">
+                        <div>x: {{ Math.round(GetPlayerEntity().navigationTarget.x) }}</div>
+                        <div>y: {{ Math.round(GetPlayerEntity().navigationTarget.y) }}</div>
+                        <div>z: {{ Math.round(GetPlayerEntity().navigationTarget.z) }}</div>
+                    </div>
+                </div>
+                
+            </div>
             
-            <div v-if="GetPlayerEntity()">{{ GetPlayerEntity().navigationTarget }}</div>
+            
+            
         </div>
 
         <div class="crosshair">
@@ -149,8 +164,9 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    width: 400px;
-    height: 100vh;
+    width: 220px;
+    height: 70px;
+    padding: 3px 5px;
     border: 1px solid white;
     background-color: rgba(white, 0.1);
     color: white;
