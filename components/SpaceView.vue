@@ -1,6 +1,19 @@
 <template>
     <div class="spaceview">
         <canvas ref="canvas"></canvas>
+
+        <div class="hud">
+            <div>x: {{ Math.round(player.position.x) }}</div>
+            <div>y: {{ Math.round(player.position.y) }}</div>
+            <div>z: {{ Math.round(player.position.z) }}</div>
+            
+            <div v-if="GetPlayerEntity()">{{ GetPlayerEntity().navigationTarget }}</div>
+        </div>
+
+        <div class="crosshair">
+            <div class="line line--horizontal"></div>
+            <div class="line line--vertical"></div>
+        </div>
     </div>
 </template>
 
@@ -67,6 +80,10 @@ export default {
     },
 
     methods: {
+        GetPlayerEntity(){
+            if(!this.playerEntity) return false
+            return this.playerEntity
+        },
         CreateRenderer(){
             this.engine = new Engine(this.$refs.canvas, true)
             this.scene = new Scene(this.engine)
@@ -125,6 +142,47 @@ export default {
         width: 100%;
         height: 100%;
         touch-action: none;
+    }
+}
+
+.hud {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    border: 1px solid white;
+    background-color: rgba(white, 0.1);
+    color: white;
+    font-size: 10px;
+}
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10vw;
+    height: 10vh;
+    margin-left: -5vw;
+    margin-top: -5vh;
+    pointer-events: none;
+}
+
+.line {
+    position: absolute;
+    background-color: white;
+    pointer-events: none;
+
+    &--horizontal {
+        top: 50%;
+        width: 100%;
+        height: 1px;
+    }
+
+    &--vertical {
+        left: 50%;
+        height: 100%;
+        width: 1px;
     }
 }
 </style>
