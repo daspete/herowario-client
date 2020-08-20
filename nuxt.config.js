@@ -20,6 +20,7 @@ export default {
 
     modules: [
         'nuxt-i18n',
+        '@nuxtjs/apollo'
     ],
 
     buildModules: [
@@ -27,6 +28,16 @@ export default {
         '@nuxtjs/tailwindcss',
         '@nuxtjs/moment'
     ],
+
+    apollo: {
+        clientConfigs: {
+            default: {
+                httpEndpoint: 'http://192.168.0.66:4000/graph',
+                wsEndpoint: 'ws://192.168.0.66:4000/subscriptions',
+                tokenName: 'herowartoken'
+            }
+        }
+    },
 
     moment: {
         locales: ['de', 'en-gb']
